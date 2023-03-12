@@ -101,3 +101,10 @@ or in short-form
 
 We use computed property for displaying values (presentation only).
 Different to methods, it is used for changing values of data.
+
+## 🚀 Splitting the modules
+
+https://vuejs.org/guide/quick-start.html#splitting-up-the-modules
+
+- Use `npx serve` to serve the static `index.html`. Otherwise it won't work because we're splitting the modules.
+- Use vscode extension `es6-string-html` to enable html highlight in `template` of the component

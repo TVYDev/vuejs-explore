@@ -13,78 +13,7 @@
     />
   </head>
   <body>
-    <div id="app" class="p-5">
-      <h1>{{ title}}</h1>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button
-          v-if="!isAdding"
-          @click="toggleIsAdding"
-          class="btn btn-info"
-          type="button"
-        >
-          Add New
-        </button>
-        <button
-          v-else
-          @click="toggleIsAdding"
-          class="btn btn-danger"
-          type="button"
-        >
-          Cancel
-        </button>
-      </div>
-      <section v-if="isAdding">
-        <div class="mb-3">
-          <label for="item" class="form-label">Item to do:</label>
-          <input
-            @keyup.enter="saveTodoItem"
-            v-model="todoItem"
-            type="text"
-            class="form-control"
-            id="item"
-            placeholder="Anything to do?"
-          />
-        </div>
-        <div class="form-check form-switch">
-          <input
-            v-model="isHighPriority"
-            class="form-check-input"
-            type="checkbox"
-            role="switch"
-            id="checkHighPriority"
-          />
-          <label class="form-check-label" for="checkHighPriority"
-            >High Priority</label
-          >
-        </div>
-        <div class="d-grid col-2 mt-3">
-          <button
-            @click="saveTodoItem"
-            :disabled="(todoItem.length < 1)"
-            type="button"
-            class="btn btn-primary"
-          >
-            Save
-          </button>
-        </div>
-      </section>
-      <hr />
-      <ul v-if="todos.length > 0" class="list-group">
-        <li
-          @click="completeItem(todo)"
-          v-for="todo in reversedTodos"
-          class="list-group-item"
-          :key="todo.id"
-          :class="[
-            todo.isHighPriority ? 'list-group-item-primary' : '',
-            todo.isDone ? 'text-decoration-line-through' : ''
-          ]"
-        >
-          {{todo.label}}
-        </li>
-      </ul>
-      <p v-else>📪 No todos at the moment, let's add new a new one!</p>
-    </div>
+    <div id="app" class="p-5"></div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
@@ -101,43 +30,9 @@
 
     <script type="module">
       import { createApp } from "vue";
+      import TodoApp from "./todo.js";
 
-      const app = createApp({
-        data() {
-          return {
-            isAdding: false,
-            title: "ToDo App",
-            todoItem: "",
-            isHighPriority: false,
-            todos: [],
-          };
-        },
-        computed: {
-          reversedTodos() {
-            return [...this.todos].reverse();
-          },
-        },
-        methods: {
-          saveTodoItem() {
-            this.todos.push({
-              id: this.todos.length + 1,
-              label: this.todoItem,
-              isHighPriority: this.isHighPriority,
-            });
-            this.resetForm();
-          },
-          resetForm() {
-            this.todoItem = "";
-            this.isHighPriority = false;
-          },
-          toggleIsAdding() {
-            this.isAdding = !this.isAdding;
-          },
-          completeItem(item) {
-            item.isDone = !item.isDone;
-          },
-        },
-      }).mount("#app");
+      const app = createApp(TodoApp).mount("#app");
     </script>
   </body>
 </html>
