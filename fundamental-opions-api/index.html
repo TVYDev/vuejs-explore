@@ -90,10 +90,19 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
-    <script src="https://unpkg.com/vue@3"></script>
 
-    <script>
-      const app = Vue.createApp({
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import { createApp } from "vue";
+
+      const app = createApp({
         data() {
           return {
             isAdding: false,
